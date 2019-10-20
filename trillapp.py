@@ -137,36 +137,9 @@ plt.scatter(y_rf[:, 0], y_rf[:, 1],
             label="RF score=%.2f" % regr_rf.score(X_test, y_test))
 plt.xlim([-6, 6])
 plt.ylim([-6, 6])
-plt.xlabel("target 1")
-plt.ylabel("target 2")
+
+plt.xlabel("X Testing", color='white')
+plt.ylabel("Y Testing", color='white')
 plt.title("Comparing random forests and the multi-output meta estimator")
 plt.legend()
-plt.show()
-
-'''# Print all of the data that had null values
-df_nans = ML.loc[ML.index.difference(df.dropna().index)]
-df_nans[jcols] = regr_multirf.predict(df_notnans[jcols])
-df_nans
-# Vel shouldn't ever be negative!
-'''
-
-"""# Refracting"""
-
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import r2_score
-
-temp = df.copy()
-temp.drop(['date', 'lat-dir', 'lon-dir'], axis = 1, inplace = True)
-
-X = temp.iloc[:, 0].values.reshape(-1, 1)  # values converts it into a numpy array
-y = temp.iloc[:, 1].values.reshape(-1, 1)
-
-for j in range(column):linear_regressor = LinearRegression()  # create object for the class
-linear_regressor.fit(X, y)  # perform linear regression
-y_pred = linear_regressor.predict(X)  # make predictions
-
-print('Variance score: %.2f' % r2_score(y, y_pred))
-
-plt.scatter(X, y)
-plt.plot(X, y_pred, color='red')
 plt.show()
